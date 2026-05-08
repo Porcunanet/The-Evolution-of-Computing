@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Evolution of Computing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            transition: all 0.3s;
+            border-radius: 3px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 4rem 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #667eea;
+        }
+
+        .section-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .section-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .section-text {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .section-text h3 {
+            color: #333;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-year {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            min-width: 100px;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 1.5rem;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-radius: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.3s;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            nav {
+                position: relative;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 2rem 1.5rem;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .timeline-year {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">💻 Computing History</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#computers">Computers</a></li>
+                <li><a href="#windows">Windows</a></li>
+                <li><a href="#apple">Apple</a></li>
+                <li><a href="#linux">Linux</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <h1>The Evolution of Computing</h1>
+            <p>Journey through the revolutionary history of computers and operating systems</p>
+        </div>
+
+        <section class="section" id="computers">
+            <h2>History of Computers</h2>
+            <div class="section-content">
+                <div class="section-image">🖥️</div>
+                <div class="section-text">
+                    <p>The history of computers spans centuries, from mechanical calculators to today's powerful digital machines. The journey began with simple counting devices and evolved into the sophisticated technology that powers our modern world.</p>
+                    
+                    <h3>Ancient Computing Tools</h3>
+                    <p>The abacus, invented around 2400 BCE in Mesopotamia, was one of the first computing tools used for arithmetic calculations. For thousands of years, humans relied on mechanical aids like the abacus, slide rules, and astronomical calculators to perform complex mathematics.</p>
+                    
+                    <h3>Mechanical Computing Era</h3>
+                    <p>In the 1800s, Charles Babbage designed the Analytical Engine, a mechanical computer that laid the groundwork for modern computing concepts. His colleague Ada Lovelace wrote what is considered the first computer algorithm, making her the world's first computer programmer. Though never completed in Babbage's lifetime, his designs influenced future generations of engineers.</p>
+                    
+                    <h3>The Digital Revolution</h3>
+                    <p>The 1940s saw the birth of electronic computers like ENIAC (Electronic Numerical Integrator and Computer), which weighed 30 tons and filled an entire room. It could perform 5,000 additions per second—revolutionary for its time. The invention of the transistor at Bell Labs in 1947 replaced bulky vacuum tubes, making computers smaller and more reliable.</p>
+                    
+                    <h3>Integrated Circuits and Microprocessors</h3>
+                    <p>The 1960s brought integrated circuits, cramming thousands of transistors onto a single chip. In 1971, Intel released the 4004, the first commercial microprocessor, launching the microcomputer revolution. This paved the way for personal computers that could fit on a desk rather than fill a room.</p>
+                    
+                    <h3>The Personal Computer Era</h3>
+                    <p>The 1970s and 80s saw computers enter homes and offices. The Altair 8800, Apple II, Commodore 64, and IBM PC made computing accessible to ordinary people. By the 1990s, the internet connected these machines globally, transforming communication, commerce, and culture forever.</p>
+                    
+                    <h3>Modern Computing</h3>
+                    <p>Today's computers are millions of times more powerful than ENIAC, yet fit in our pockets. Smartphones, cloud computing, artificial intelligence, and quantum computers represent the latest chapters in this ongoing revolution. The pace of innovation continues to accelerate exponentially.</p>
+                </div>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">1837</div>
+                    <div class="timeline-content">
+                        <strong>Analytical Engine</strong> - Charles Babbage designs first mechanical computer concept
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1946</div>
+                    <div class="timeline-content">
+                        <strong>ENIAC</strong> - First general-purpose electronic computer unveiled
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1947</div>
+                    <div class="timeline-content">
+                        <strong>Transistor Invented</strong> - Revolutionizes computing by replacing vacuum tubes
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1971</div>
+                    <div class="timeline-content">
+                        <strong>Intel 4004</strong> - First commercial microprocessor released
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1975</div>
+                    <div class="timeline-content">
+                        <strong>Altair 8800</strong> - Sparked the personal computer revolution
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1981</div>
+                    <div class="timeline-content">
+                        <strong>IBM PC</strong> - Standardized personal computing for business
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1989</div>
+                    <div class="timeline-content">
+                        <strong>World Wide Web</strong> - Tim Berners-Lee invents the web at CERN
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="windows">
+            <h2>History of Windows</h2>
+            <div class="section-content">
+                <div class="section-text">
+                    <p>Microsoft Windows transformed personal computing with its graphical user interface, making computers accessible to millions of users worldwide. From humble beginnings as a DOS extension to becoming the world's most popular desktop operating system, Windows has shaped how we interact with technology.</p>
+                    
+                    <h3>The Beginning (1985-1990)</h3>
+                    <p>Windows 1.0 launched in November 1985 as a graphical extension of MS-DOS. Bill Gates and Microsoft envisioned a more user-friendly interface with windows, icons, and mouse support. Though primitive by today's standards, it introduced concepts like overlapping windows, drop-down menus, and scroll bars. Windows 2.0 (1987) improved performance and introduced the Control Panel. Windows 3.0 (1990) was the first commercially successful version, selling 10 million copies in its first two years.</p>
+                    
+                    <h3>Windows 95 Revolution</h3>
+                    <p>Released in August 1995 with massive fanfare (including the Rolling Stones' "Start Me Up"), Windows 95 was a game-changer. It introduced the iconic Start menu, taskbar, and the concept of "plug and play" hardware. The 32-bit architecture, long filename support, and integrated TCP/IP networking made it perfect for the emerging internet age. It sold 7 million copies in the first five weeks.</p>
+                    
+                    <h3>The NT Line and Business Dominance</h3>
+                    <p>Windows NT (New Technology) was developed separately as a more stable, secure system for businesses. Windows 2000 merged the NT kernel with the consumer-friendly interface. Windows XP (2001) unified consumer and business lines into one robust OS that became beloved worldwide, remaining in use for over a decade. Its Luna interface and improved stability made it a classic.</p>
+                    
+                    <h3>Vista, 7, and Recovery</h3>
+                    <p>Windows Vista (2007) struggled with performance issues and compatibility problems, becoming one of Microsoft's most criticized releases. Windows 7 (2009) redeemed Microsoft with improved speed, better touch support, and the refined Aero interface. It became the second-most popular OS after XP.</p>
+                    
+                    <h3>The Modern Touch Era</h3>
+                    <p>Windows 8 (2012) dramatically redesigned the interface for touch screens with Metro/Modern UI tiles, alienating traditional desktop users. Windows 8.1 partially restored the Start button. Windows 10 (2015) struck a balance, bringing back the Start menu while adding features like Cortana, virtual desktops, and the Edge browser. Microsoft made it a "service" with continuous updates rather than major version releases.</p>
+                    
+                    <h3>Windows 11 and Beyond</h3>
+                    <p>Windows 11 (2021) introduced a centered taskbar, rounded corners, and deeper Microsoft 365 integration. It emphasizes cloud services, gaming features with DirectStorage and Auto HDR, and Android app support through the Microsoft Store. Windows continues evolving with AI features like Copilot assistant, showing Microsoft's vision for the future of computing.</p>
+                </div>
+                <div class="section-image">🪟</div>
+            </div>
+        </section>
+
+        <section class="section" id="apple">
+            <h2>History of Apple</h2>
+            <div class="section-content">
+                <div class="section-image">🍎</div>
+                <div class="section-text">
+                    <p>Apple revolutionized personal computing with innovative design and user-friendly interfaces that set new industry standards. Founded by Steve Jobs, Steve Wozniak, and Ronald Wayne in 1976, Apple has consistently pushed the boundaries of what's possible with technology.</p>
+                    
+                    <h3>The Apple I and II</h3>
+                    <p>The Apple I (1976), hand-built by Wozniak in Jobs' garage, was sold as a motherboard kit for hobbyists. Only about 200 were produced. The Apple II (1977) was the breakthrough—a complete, ready-to-use computer with color graphics, sound, and expansion slots. It became wildly popular in homes and schools, launching the personal computer revolution. The Apple II line remained in production until 1993, an extraordinary 16-year run.</p>
+                    
+                    <h3>The Macintosh Revolution</h3>
+                    <p>The 1984 Macintosh, introduced with a legendary Super Bowl commercial, brought graphical computing to the masses. Its intuitive mouse-driven interface, inspired by Xerox PARC's research, made computers accessible to non-technical users. The Mac pioneered desktop publishing with PageMaker and LaserWriter, creating an entire industry. Despite slow initial sales, the Mac established Apple's reputation for innovation and design excellence.</p>
+                    
+                    <h3>The Wilderness Years</h3>
+                    <p>After Jobs was ousted in 1985, Apple struggled through the 1990s with confusing product lines and declining market share. Windows PCs dominated the market. Failed projects like the Newton PDA and Copland OS nearly bankrupted the company. By 1997, Apple was 90 days from insolvency when Jobs returned as interim CEO.</p>
+                    
+                    <h3>The Renaissance: Mac OS X</h3>
+                    <p>Jobs streamlined the product line and acquired NeXT, his own company, bringing its advanced Unix-based NeXTSTEP OS to Apple. Mac OS X (2001) was born, combining Unix stability with Apple's elegant interface. The Aqua design language with its translucent buttons and smooth animations set new standards. OS X became the foundation for all future Apple operating systems.</p>
+                    
+                    <h3>The iPod, iPhone, and Ecosystem</h3>
+                    <p>While not computers initially, the iPod (2001), iPhone (2007), and iPad (2010) transformed Apple into a consumer electronics giant. iOS, derived from OS X, brought desktop-class capabilities to mobile devices. The App Store created a new software economy. Apple's ecosystem of devices, services, and software working seamlessly together became its greatest strength.</p>
+                    
+                    <h3>Modern macOS Era</h3>
+                    <p>From Mac OS X to macOS (rebranded in 2016), Apple continued refining its desktop OS. Key releases included Leopard (Time Machine backup), Snow Leopard (performance focus), Lion (iOS features), and High Sierra (APFS file system). macOS Big Sur (2020) brought iOS-inspired design and Apple Silicon support, allowing Macs to run on custom ARM processors. This transition, reminiscent of previous PowerPC and Intel transitions, demonstrated Apple's technical prowess and long-term vision.</p>
+                    
+                    <h3>The Apple Silicon Revolution</h3>
+                    <p>In 2020, Apple announced its biggest transition yet: moving from Intel processors to custom Apple Silicon chips based on ARM architecture. The M1, M2, and M3 chips deliver exceptional performance and battery life, running both native and Intel apps through Rosetta 2 translation. This vertical integration—controlling hardware, software, and silicon—gives Apple unprecedented optimization capabilities. macOS Sequoia and beyond continue evolving with AI features, improved privacy, and deeper ecosystem integration.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="linux">
+            <h2>History of Linux</h2>
+            <div class="section-content">
+                <div class="section-text">
+                    <p>Linux represents the power of open-source collaboration, growing from a student project to powering everything from smartphones to supercomputers. It's a testament to what global cooperation and shared knowledge can achieve, fundamentally changing how software is developed and distributed.</p>
+                    
+                    <h3>The Unix Foundation</h3>
+                    <p>To understand Linux, we must start with Unix. Created at Bell Labs in 1969 by Ken Thompson and Dennis Ritchie, Unix introduced revolutionary concepts: hierarchical file systems, pipelines, multitasking, and portability through the C programming language. Unix's design philosophy emphasized simplicity, modularity, and "do one thing well." However, by the 1980s, Unix had become fragmented into proprietary versions (Solaris, HP-UX, AIX) that were expensive and incompatible. AT&T's licensing restrictions prevented free distribution and modification.</p>
+                    
+                    <h3>The GNU Project</h3>
+                    <p>In 1983, Richard Stallman launched the GNU Project (GNU's Not Unix) to create a completely free Unix-like operating system. Stallman, frustrated by proprietary software restrictions, wrote the GNU General Public License (GPL) ensuring software freedom: to use, study, modify, and distribute. By the late 1980s, GNU had developed most components—compilers (GCC), editors (Emacs), shells (bash), and utilities—but crucially lacked a working kernel. Their kernel, GNU Hurd, remained in development.</p>
+                    
+                    <h3>Birth of Linux (1991)</h3>
+                    <p>In 1991, Linus Torvalds, a 21-year-old Finnish computer science student at the University of Helsinki, began writing his own Unix-like kernel as a hobby, inspired by Minix (a educational Unix clone). On August 25, 1991, he posted to the comp.os.minix newsgroup: "I'm doing a (free) operating system (just a hobby, won't be big and professional like gnu) for 386(486) AT clones." He released Linux 0.01 in September 1991 with about 10,000 lines of code. Initially released under restrictive license, he switched to GPL in 1992—a pivotal decision that enabled widespread collaboration.</p>
+                    
+                    <h3>The Tux Mascot</h3>
+                    <p>In 1996, Linux adopted Tux the penguin as its mascot. The name "Tux" plays on "Torvalds Unix" and the penguin's tuxedo-like appearance. The friendly, approachable mascot helped humanize the technical project and became one of computing's most recognizable symbols, appearing on merchandise, conference materials, and representing Linux worldwide.</p>
+                    
+                    <h3>Early Development and Versioning</h3>
+                    <p>Linux development accelerated rapidly through internet collaboration. Version 0.11 (December 1991) could run bash and GCC. Linux 0.95 (March 1992) was the first version capable of running X Window System. By March 1994, Linux 1.0 was released with 176,250 lines of code, supporting networks and multiple processors. Version 2.0 (1996) brought SMP (symmetric multiprocessing) support. The kernel adopted a versioning scheme where even numbers (2.2, 2.4, 2.6) were stable releases and odd numbers were development versions.</p>
+                    
+                    <h3>Distributions Emerge</h3>
+                    <p>Early Linux was difficult to install—users compiled kernels and assembled components manually. Distributions packaged everything together with installation tools. Slackware (1993) was one of the first, focusing on simplicity. Debian (1993) emphasized free software principles and community governance. Red Hat Linux (1994) targeted enterprise users with support contracts. SUSE (1994) gained popularity in Europe. These distributions made Linux accessible beyond hardcore enthusiasts, each developing unique package management systems and philosophies.</p>
+                    
+                    <h3>The Cathedral and the Bazaar</h3>
+                    <p>In 1997, Eric S. Raymond published "The Cathedral and the Bazaar," analyzing Linux's development model. He contrasted the "cathedral" model (closed, centralized development) with Linux's "bazaar" model (open, decentralized collaboration). The essay influenced both technical and business communities, demonstrating how distributed development could produce superior software. It helped convince Netscape to open-source their browser (creating Mozilla), accelerating the open-source movement.</p>
+                    
+                    <h3>Enterprise Adoption and The SCO Wars</h3>
+                    <p>The late 1990s and early 2000s saw major companies embrace Linux. IBM invested billions in Linux development and ran famous "Peace, Love, and Linux" commercials in 2001. Oracle ported its database to Linux in 1998. The LAMP stack (Linux, Apache, MySQL, PHP/Python/Perl) became the foundation of web infrastructure. However, in 2003, SCO Group sued IBM claiming Linux violated Unix copyrights, seeking billions in damages. The lawsuit, which dragged on for years, ultimately failed but created FUD (fear, uncertainty, doubt) around Linux adoption. The community rallied, documenting Linux's independent development.</p>
+                    
+                    <h3>Ubuntu and Desktop Accessibility</h3>
+                    <p>In 2004, Mark Shuttleworth launched Ubuntu with the ambitious goal "Linux for human beings." Ubuntu emphasized ease of use, regular six-month releases, and free distribution via ShipIt (mailing free CDs worldwide). Its brown theme was distinctive but later refined to purple. Ubuntu popularized live CDs—letting users try Linux without installing. Unity desktop (later abandoned for GNOME) brought controversial changes. Ubuntu's success spawned derivatives: Kubuntu (KDE), Xubuntu (Xfce), Lubuntu (lightweight), and Linux Mint (which removed Ubuntu's controversial features). By the 2010s, Ubuntu dominated desktop Linux.</p>
+                    
+                    <h3>The Mobile Revolution: Android</h3>
+                    <p>In 2008, Google released Android 1.0, built on the Linux kernel. Though heavily modified and not including GNU tools, Android brought Linux to mobile. By 2011, Android became the world's most popular smartphone OS, surpassing iOS. Today, with over 70% mobile market share globally, Android put Linux in billions of pockets—though most users don't realize they're running Linux. Google's modifications and control created tension with the free software community about Android's "open" nature.</p>
+                    
+                    <h3>Server Dominance</h3>
+                    <p>Linux conquered the server market through reliability, security, and cost-effectiveness. By the 2000s, Linux ran more web servers than any other OS. Apache on Linux became the internet's backbone. Email servers, DNS servers, and databases increasingly ran on Linux. Companies like Google built their entire infrastructure on Linux, developing tools and optimizations they shared back. Facebook, Twitter, and virtually every major internet company ran on Linux. Microsoft's Steve Ballmer calling Linux "a cancer" in 2001 highlighted its threat to Windows Server.</p>
+                    
+                    <h3>Supercomputing Supremacy</h3>
+                    <p>In 1998, the first Linux supercomputer appeared on the Top500 list. By 2005, Linux surpassed other operating systems in supercomputing. By 2017, all 500 of the world's fastest supercomputers ran Linux. Its customizability, performance, and ability to scale across thousands of processors made it ideal. Projects like Beowulf clusters demonstrated building supercomputers from commodity hardware running Linux, democratizing high-performance computing.</p>
+                    
+                    <h3>Git and Development Tools</h3>
+                    <p>In 2005, Linus Torvalds created Git to manage Linux kernel development after BitKeeper (the previous version control system) became unavailable. Git's distributed model revolutionized software development, becoming the standard for version control. GitHub (2008) built on Git became the world's largest code hosting platform. This tooling, born from Linux needs, transformed software development globally—even Microsoft eventually acquired GitHub for $7.5 billion.</p>
+                    
+                    <h3>Embedded Systems and IoT</h3>
+                    <p>Linux's small footprint and flexibility made it perfect for embedded systems. Routers from Cisco, Netgear, and others run Linux. Smart TVs from Samsung, LG, and Sony use Linux variants. TiVo DVRs, Tesla cars, drones, and the Large Hadron Collider's systems run Linux. The Raspberry Pi (2012) brought Linux to hobbyists and education, selling tens of millions of units. Linux powers the Internet of Things, from smart home devices to industrial sensors.</p>
+                    
+                    <h3>Cloud Computing Backbone</h3>
+                    <p>Linux became the backbone of cloud computing. Amazon AWS (launched 2006) predominantly runs Linux. Microsoft Azure, despite being from Microsoft, runs more Linux VMs than Windows. Google Cloud Platform is entirely Linux-based. Docker containers (2013) and Kubernetes (2014) revolutionized application deployment, both built on Linux kernel features like namespaces and cgroups. Over 90% of public cloud workloads run on Linux. Cloud-native development is essentially Linux development.</p>
+                    
+                    <h3>Microsoft's Remarkable Reversal</h3>
+                    <p>Microsoft's relationship with Linux underwent a stunning transformation. After Ballmer's "cancer" comment and patent threats in the 2000s, Microsoft began collaborating. In 2012, they contributed code to the Linux kernel for Hyper-V drivers. In 2016, they launched Windows Subsystem for Linux (WSL), bringing Linux to Windows. In 2018, Microsoft joined the Linux Foundation as a platinum member. They open-sourced .NET and brought SQL Server to Linux. Satya Nadella declared "Microsoft loves Linux." This reversal reflected cloud realities—Azure's success required Linux support.</p>
+                    
+                    <h3>Gaming on Linux</h3>
+                    <p>Gaming traditionally hindered Linux desktop adoption—AAA titles rarely released Linux versions. Valve's Steam platform, initially Windows-only, came to Linux in 2013. Valve developed Proton (based on Wine) to run Windows games on Linux with minimal performance loss. The Steam Deck handheld (2022) runs a custom Linux distribution (SteamOS), proving Linux's gaming viability. Anti-cheat compatibility and increasing developer support slowly improved Linux gaming, though challenges remain.</p>
+                    
+                    <h3>Security and Privacy</h3>
+                    <p>Linux's open-source nature enables transparent security audits—anyone can examine code for vulnerabilities or backdoors. This transparency builds trust, especially for privacy-conscious users and governments. However, the 2014 Heartbleed bug in OpenSSL showed open-source isn't automatically secure—critical infrastructure needs proper funding and review. Still, Linux's permission model, SELinux (Security-Enhanced Linux), and rapid patching provide strong security. Privacy-focused distributions like Tails (used by Edward Snowden) and Qubes OS demonstrate Linux's security capabilities.</p>
+                    
+                    <h3>Systemd Controversy</h3>
+                    <p>In 2010, systemd was introduced as a replacement for traditional init systems, managing system services and boot processes. Its adoption became one of Linux's most divisive controversies. Proponents praised its speed, modern design, and unified management. Critics argued it violated Unix philosophy (doing one thing well), was overly complex, and centralized too much power. Major distributions adopted systemd despite backlash. The debate highlighted tensions between modernization and tradition in the Linux community.</p>
+                    
+                    <h3>Chromebooks and Education</h3>
+                    <p>Google's Chrome OS (2011), based on the Linux kernel and Gentoo, brought Linux to mainstream users—though most don't know it. Chromebooks became popular in education, offering affordable, secure, cloud-based computing. By 2020, Chromebooks outsold Macs in the US. While minimalist by design, Chrome OS demonstrated Linux's versatility—from supercomputers to simple laptops for students.</p>
+                    
+                    <h3>The Linux Foundation</h3>
+                    <p>Founded in 2000 (as Open Source Development Labs, merging with Free Standards Group in 2007), The Linux Foundation coordinates development, protects the Linux trademark, provides legal support, and hosts collaborative projects. Linus Torvalds is employed by the Foundation to maintain the kernel. It hosts thousands of open-source projects beyond Linux (Kubernetes, Node.js, etc.) and counts major tech companies as members. This neutral organization helped Linux mature from hobbyist project to professional platform.</p>
+                    
+                    <h3>Kernel Development Today</h3>
+                    <p>The Linux kernel receives thousands of contributions daily from developers at Intel, Red Hat, Google, Samsung, IBM, and independent contributors. Major releases occur every 9-10 weeks. The kernel has grown from 10,000 lines to over 30 million lines of code. Linus Torvalds remains the final authority, merging changes and maintaining quality. His no-nonsense (sometimes harsh) management style and technical vision guide development. Subsystem maintainers handle specific areas (networking, filesystems, etc.), creating a hierarchical but meritocratic structure.</p>
+                    
+                    <h3>The Philosophy and Culture</h3>
+                    <p>Linux embodies the open-source philosophy: transparency, collaboration, and freedom. Anyone can view, modify, and distribute the source code. The GPL ensures modifications remain open, preventing proprietary capture. This "copyleft" approach creates a commons—code freely available to all. The culture values technical merit over credentials, welcoming contributors worldwide regardless of background. Flame wars, technical debates, and passionate arguments are normal—driven by genuine care for the project. The community includes corporations, hobbyists, activists, and pragmatists, sometimes conflicting but united in belief that open source produces better software.</p>
+                    
+                    <h3>Challenges and Future</h3>
+                    <p>Despite success, challenges remain. Desktop market share hovers around 3-4%, limited by software availability (Adobe, Microsoft Office), learning curves, and hardware compatibility issues. Fragmentation across distributions creates confusion. Corporate influence raises concerns about community control. Driver support, though improved, lags proprietary systems. Yet Linux's future looks bright: cloud computing, containerization, edge computing, and AI/ML platforms increasingly rely on Linux. The introduction of Rust language support in the kernel (2022) modernizes development. As software moves to web and cloud, the underlying OS matters less—favoring Linux's server dominance.</p>
+                    
+                    <h3>Legacy and Impact</h3>
+                    <p>Linux proved collaborative, open-source development could produce world-class software rivaling proprietary alternatives. It demonstrated that transparency and freedom don't compromise quality—they enhance it. Linux influenced countless projects: Firefox, LibreOffice, WordPress, and thousands more. It enabled the internet's explosive growth, cloud computing's rise, and mobile revolution. Perhaps most importantly, Linux showed an alternative to proprietary software's restrictions, inspiring developers worldwide to share knowledge freely. From a student's hobby project to powering most of the digital world, Linux stands as one of computing's greatest success stories and a testament to human collaboration.</p>
+                </div>
+                <div class="section-image">🐧</div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Computing History | Educational Resource</p>
+        </footer>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
